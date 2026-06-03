@@ -255,6 +255,8 @@ class SplatOpts:
     disassemble_all: bool
     # Emit a full `.s` file for each `c`/`cpp` segment besides the generated `nonmatchings` individual functions
     make_full_disasm_for_code: bool
+    # Emit a full `.s` file for each `hasm` segment besides the generated `nonmatchings` individual functions, only if hasm is in source path
+    make_full_disasm_for_hasm: bool
     # Allow specifying that the global memory range may be larger than what was automatically detected.
     # Useful for projects where splat is used in multiple individual files, meaning the expected global segment may not be properly detected because each instance of splat can't see the info from other files.
     global_vram_start: Optional[int]
@@ -653,6 +655,7 @@ def _parse_yaml(
         disassemble_all=p.parse_opt("disassemble_all", bool, False) or disasm_all,
         make_full_disasm_for_code=p.parse_opt("make_full_disasm_for_code", bool, False)
         or make_full_disasm_for_code,
+        make_full_disasm_for_hasm=p.parse_opt("make_full_disasm_for_hasm", bool, False),
         global_vram_start=p.parse_optional_opt("global_vram_start", int),
         global_vram_end=p.parse_optional_opt("global_vram_end", int),
         use_gp_rel_macro_nonmatching=p.parse_opt(
